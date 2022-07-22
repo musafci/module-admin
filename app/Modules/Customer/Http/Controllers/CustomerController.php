@@ -3,18 +3,20 @@
 namespace App\Modules\Customer\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Customer\Http\Requests\CustomerRequest;
+use App\Modules\Customer\Interfaces\CustomerInterface;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    protected $userInteface;
+    protected $customerInteface;
 
     /**
      * Create a new constructor for this controller
      */
-    public function __construct(UserInterface $userInterface)
+    public function __construct(CustomerInterface $customerInterface)
     {
-        $this->userInterface = $userInterface;
+        $this->customerInterface = $customerInterface;
     }
 
     /**
@@ -24,7 +26,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return $this->userInterface->getAllUsers();
+        return $this->customerInterface->getAllCustomers();
     }
 
     /**
@@ -33,9 +35,9 @@ class CustomerController extends Controller
      * @param  \App\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(CustomerRequest $request)
     {
-        return $this->userInterface->requestUser($request);
+        return $this->customerInterface->requestCustomer($request);
     }
 
     /**
@@ -46,19 +48,19 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        return $this->userInterface->getUserById($id);
+        return $this->customerInterface->getCustomerById($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\Http\Requests\CustomerRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        return $this->userInterface->requestUser($request, $id);
+        return $this->customerInterface->requestCustomer($request, $id);
     }
 
     /**
@@ -69,6 +71,6 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        return $this->userInterface->deleteUser($id);
+        return $this->customerInterface->deleteCustomer($id);
     }
 }

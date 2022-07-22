@@ -7,43 +7,43 @@ use App\Modules\Customer\Http\Requests\CustomerRequest;
 interface CustomerInterface
 {
     /**
-     * Get all users
+     * Get all customer
      * 
-     * @method  GET api/users
+     * @method  GET api/customer
      * @access  public
      */
-    public function getAllUsers();
+    public function getAllCustomers();
 
     /**
-     * Get User By ID
+     * Get Customer By ID
      * 
      * @param   integer     $id
      * 
-     * @method  GET api/users/{id}
+     * @method  GET api/customer/{id}
      * @access  public
      */
-    public function getUserById($id);
+    public function getCustomerById($id);
 
     /**
-     * Create | Update user
+     * Create | Update Customer
      * 
-     * @param   \App\Http\Requests\UserRequest    $request
+     * @param   \App\Http\Requests\CustomerRequest    $request
      * @param   integer                           $id
      * 
-     * @method  POST    api/users       For Create
-     * @method  PUT     api/users/{id}  For Update     
+     * @method  POST    api/customer       For Create
+     * @method  PUT     api/customer/{id}  For Update     
      * @access  public
      */
-    public function requestUser(CustomerRequest $request, $id = null);
+    public function requestCustomer(CustomerRequest $request, $id = null);
 
     /**
-     * Delete user
+     * Delete Customer
      * 
      * @param   integer     $id
      * 
-     * @method  DELETE  api/users/{id}
+     * @method  DELETE  api/customer/{id}
      * @access  public
      */
-    public function deleteUser($id);
+    public function deleteCustomer($id);
 
 }

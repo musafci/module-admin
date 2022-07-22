@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Modules\Customer\Traits;
+
 trait Helper {
     
     /**

@@ -2,89 +2,89 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\UserRequest;
-use App\Interfaces\UserInterface;
-use App\Traits\ResponseAPI;
-use App\Models\User;
+use App\Modules\Customer\Http\Requests\CustomerRequest;
+use App\Modules\Customer\Interfaces\CustomerInterface;
+use App\Modules\Customer\Models\Customer;
+use App\Modules\Customer\Traits\Helper;
 use DB;
 
-class UserRepository implements UserInterface
+class CustomerRepostitory implements CustomerInterface
 {
-    // Use ResponseAPI Trait in this repository
-    use ResponseAPI;
+    // Use Helper Trait in this repository
+    use Helper;
 
-    public function getAllUsers()
+    public function getAllCustomers()
     {
         try {
-            $users = User::all();
-            return $this->success("All Users", $users);
+            $customers = Customer::all();
+            return $this->success("All Customers", $customers);
         } catch(\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
 
-    public function getUserById($id)
+    public function getCustomerById($id)
     {
         try {
-            $user = User::find($id);
+            $customer = Customer::find($id);
             
-            // Check the user
-            if(!$user) return $this->error("No user with ID $id", 404);
+            // Check the customer
+            if(!$customer) return $this->error("No customer with ID $id", 404);
 
-            return $this->success("User Detail", $user);
+            return $this->success("Customer Detail", $customer);
         } catch(\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
 
-    public function requestUser(UserRequest $request, $id = null)
+    public function requestCustomer(CustomerRequest $request, $id = null)
     {
         DB::beginTransaction();
         try {
-            // If user exists when we find it
-            // Then update the user
+            // If customer exists when we find it
+            // Then update the customer
             // Else create the new one.
-            $user = $id ? User::find($id) : new User;
+            $customer = $id ? Customer::find($id) : new Customer;
 
-            // Check the user 
-            if($id && !$user) return $this->error("No user with ID $id", 404);
+            // Check the customer 
+            if($id && !$customer) return $this->error("No customer with ID $id", 404);
 
-            $user->name = $request->name;
+            $customer->name = $request->name;
             // Remove a whitespace and make to lowercase
-            $user->email = preg_replace('/\s+/', '', strtolower($request->email));
+            $customer->email = preg_replace('/\s+/', '', strtolower($request->email));
             
             // I dont wanna to update the password, 
-            // Password must be fill only when creating a new user.
-            if(!$id) $user->password = \Hash::make($request->password);
+            // Password must be fill only when creating a new customer.
+            if(!$id) $customer->password = \Hash::make($request->password);
 
-            // Save the user
-            $user->save();
+            // Save the customer
+            $customer->save();
 
             DB::commit();
             return $this->success(
-                $id ? "User updated"
-                    : "User created",
-                $user, $id ? 200 : 201);
+                $id ? "Customer updated"
+                    : "Customer created",
+                $customer, $id ? 200 : 201);
         } catch(\Exception $e) {
             DB::rollBack();
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
 
-    public function deleteUser($id)
+    public function deleteCustomer($id)
     {
         DB::beginTransaction();
         try {
-            $user = User::find($id);
+            $customer = Customer::find($id);
 
-            // Check the user
-            if(!$user) return $this->error("No user with ID $id", 404);
+            // Check the customer
+            if(!$customer) return $this->error("No customer with ID $id", 404);
 
-            // Delete the user
-            $user->delete();
+            // Delete the customer
+            $customer->delete();
 
             DB::commit();
-            return $this->success("User deleted", $user);
+            return $this->success("Customer deleted", $customer);
         } catch(\Exception $e) {
             DB::rollBack();
             return $this->error($e->getMessage(), $e->getCode());
