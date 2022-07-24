@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Customer\Http\Controllers;
+namespace App\Modules\Customer\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Customer\Http\Requests\CustomerRequest;
@@ -26,6 +26,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        return view('Customer::index');
         return $this->customerInterface->getAllCustomers();
     }
 

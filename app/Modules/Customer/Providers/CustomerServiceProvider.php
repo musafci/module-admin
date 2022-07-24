@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace App\Modules\Customer\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class RepositoryServiceProvider extends ServiceProvider
+class CustomerServiceProvider extends ServiceProvider
 {
     public function register()
     {
@@ -12,8 +12,8 @@ class RepositoryServiceProvider extends ServiceProvider
         // You must place Interface in first place
         // If you dont, the Repository will not get readed.
         $this->app->bind(
-            'App\Interfaces\UserInterface',
-            'App\Repositories\UserRepository'
+            'App\Modules\Customer\Interfaces\CustomerInterface',
+            'App\Modules\Customer\Repositories\CustomerRepostitory'
         );
     }
 }

@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/form', function () {
+    return view('admin.pages.form');
+})->middleware(['auth'])->name('form');
+
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');

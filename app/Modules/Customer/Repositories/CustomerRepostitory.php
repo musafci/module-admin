@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Modules\Customer\Repositories;
 
 use App\Modules\Customer\Http\Requests\CustomerRequest;
 use App\Modules\Customer\Interfaces\CustomerInterface;
 use App\Modules\Customer\Models\Customer;
 use App\Modules\Customer\Traits\Helper;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CustomerRepostitory implements CustomerInterface
 {
