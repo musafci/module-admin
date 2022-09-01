@@ -19,19 +19,7 @@
                 </div>
             </div>
         </div>
-        
-        <?php
-        // echo "<pre>";
-        //     print_r($customers);
-        //     echo "<pre>";
-        ?>
 
-        @foreach($customers as $customer)
-            {{$customer->name}}
-        @endforeach
-        
-        {{-- {{ $customers }} --}}
-        
         <!-- row  -->
         <div class="row mt-6">
             <div class="col-md-12 col-12">
